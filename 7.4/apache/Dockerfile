@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
         vim \
 	libonig-dev \
         libicu-dev \
+	sensible-utils \
         git && \
         apt autoremove && apt clean
 
