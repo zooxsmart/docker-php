@@ -1,4 +1,4 @@
-FROM php:7.4
+FROM php:7.4-apache
 
 MAINTAINER Leandro Silva <leandro.silva@zooxsmart.com>
 
