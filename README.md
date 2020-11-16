@@ -5,7 +5,7 @@ Docker PHP image with some extra modules:
 - ctype
 - gd
 - gettext
-- intl with ICU 65.1
+- intl
 - mbstring
 - mongodb
 - mysqli

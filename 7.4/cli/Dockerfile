@@ -1,43 +1,35 @@
 FROM php:7.4
 
-MAINTAINER Leandro Silva <leandro.silva@zooxsmart.com>
-
-# install modules 
+# install modules
 RUN apt-get update && apt-get install -y \
-        procps \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libpng-dev \
-        openssl \
-        libssh-dev \
-        libpcre3 \
-        libpcre3-dev \
-        libnghttp2-dev \
-        libhiredis-dev \
-        libbz2-dev \
-        libedit-dev \
-        libxml2-dev \
-	libsodium-dev \
-	libzip-dev \
-        libcurl4-openssl-dev \
-        curl \
-        wget \
-        zip \
-        unzip \
-        vim \
-	libonig-dev \
-        libicu-dev \
-        git && \
-        apt autoremove && apt clean
-
-# Install updated ICU
-RUN cd /tmp && \
-    curl -L -o /tmp/icu.tgz https://github.com/unicode-org/icu/releases/download/release-65-1/icu4c-65_1-src.tgz && \
-    tar zxvf /tmp/icu.tgz && cd icu/source && \
-    ./configure --prefix="/usr" --libdir=/usr/lib/x86_64-linux-gnu && make && make install
+    procps \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    openssl \
+    libssh-dev \
+    libpcre3 \
+    libpcre3-dev \
+    libnghttp2-dev \
+    libhiredis-dev \
+    libbz2-dev \
+    libedit-dev \
+    libxml2-dev \
+    libsodium-dev \
+    libzip-dev \
+    libcurl4-openssl-dev \
+    curl \
+    wget \
+    zip \
+    unzip \
+    vim \
+    libonig-dev \
+    libicu-dev \
+    git && \
+    apt autoremove && apt clean
 
 # install php ext
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \ 
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install \
     bcmath \
     bz2 \
@@ -67,7 +59,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 # install swoole
 #TIP: it always get last stable version of swoole coroutine.
 RUN cd /root && \
-    curl -L -o /tmp/swoole.tar.gz https://github.com/swoole/swoole-src/archive/v4.4.12.tar.gz && \
+    curl -L -o /tmp/swoole.tar.gz https://github.com/swoole/swoole-src/archive/v4.5.7.tar.gz && \
     tar zxvf /tmp/swoole.tar.gz && cd swoole-src* && \
     phpize && \
     ./configure \
@@ -83,7 +75,7 @@ RUN cd /root && \
 # Cleanup
 RUN rm -rf /tmp/*
 
-# set China timezone
+# set UTC timezone
 RUN echo 'UTC' > /etc/timezone && \
     echo "[Date]\ndate.timezone=UTC" > /usr/local/etc/php/conf.d/timezone.ini
 
