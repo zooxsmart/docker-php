@@ -1,4 +1,4 @@
-FROM php:8.9-fpm
+FROM php:8.0-fpm
 
 # install modules
 RUN apt-get update && apt-get install -y \
